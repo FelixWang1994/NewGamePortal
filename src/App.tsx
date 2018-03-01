@@ -2,29 +2,22 @@ import * as React from 'react';
 import './App.css';
 
 import AppHeader from './AppHeader';
-import GamesList from './GamesList';
+import GamesList from './components/GamesList';
 
-import { connect } from 'react-redux';
-import { StoreState } from './types/index';
+interface AppProps {
+  fetchList: any;
+}
 
-const mapStateToProps = (state: StoreState) => ({
-  gamesList: state.gamesList
-});
+class App extends React.Component<AppProps> {
 
-// Later this will take dispatch: any as argument
-const mapDispatchToProps = () => ({
-});
-
-const GamesListContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps)(GamesList);
-
-class App extends React.Component {
+  constructor(props: AppProps) {
+    super(props);
+  }
   render() {
     return (
       <div>
         <AppHeader />
-        <GamesListContainer />
+        <GamesList fetchList={this.props.fetchList} />
       </div>
     );
   }
